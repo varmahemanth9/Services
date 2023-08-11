@@ -7,7 +7,7 @@ should install node and mongoDB
 npm start / node server.js
 
 # Apis 
-create POST longUrl key in body ("/")
-update PUT longUrl key in body and shortkey in param ("/<shortkey>")
-delete DELETE shortkey in param ("/<shortkey>")
-redirect GET shortkey in param ("/<shortkey>")
+Create - POST | "/tinyurl" | {"longUrl": "<link>"}
+Update - PUT | "/tinyurl/<key>" |  {"longUrl": "<link>"}
+Delete - DELETE | "/tinyurl/<key>"
+Redirect - GET | "/tinyurl/<key>"
