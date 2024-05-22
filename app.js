@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { client } from "./commonFunctions/redis.js";
-// import testController from "./controllers/testController.js";
+import testController from "./controllers/testController.js";
 
 const app = express();
 client.connect();
@@ -22,7 +22,7 @@ app.use(
 );
 // app.use(helmet());
 
-// app.use("/external-api/test", testController);
+app.use("/", testController);
 
 app.use((error, req, res, next) => {
     if (error) {

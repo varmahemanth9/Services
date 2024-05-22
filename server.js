@@ -1,6 +1,6 @@
 import app from "./app.js";
 import http from "http";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 import { Server } from "socket.io";
 import { createAdapter } from "@socket.io/redis-adapter";
 import { client } from "./commonFunctions/redis.js";

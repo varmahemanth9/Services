@@ -1,14 +1,17 @@
 import express from "express";
-import validator from "../validators/intrinioValidator.js";
-import * as intrinioService from "../services/intrinioService.js";
+// import validator from "../validators/testValidator.js";
+// import * as intrinioService from "../services/intrinioService.js";
+import * as client from "../commonFunctions/redis.js";
 
 const router = express.Router();
 
-router.use(validator);
+// router.use(validator);
 
-router.post("/test-api", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    return res.status(200).json({ message: " Successful" });
+    const key = "counter";
+    const cache = await client.increamentKey(key);
+    return res.status(200).json({ message: "OK", cache });
   } catch (error) {
     throw error;
   }
