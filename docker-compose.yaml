@@ -6,14 +6,39 @@ services:
       - "6379:6379"
       - "8001:8001"
 
-  app:
-    build: .
+  mongodb:
+    image: "mongo:latest"
+    ports:
+      - "27018:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: rootuser
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+      MONGO_INITDB_DATABASE: sekharapp
+    volumes:
+      - mongo-data:/data/db
+
+  user:
+    build: ./userService
     ports:
       - "3001:3001"
     depends_on:
       - redis
+      - mongodb
+    volumes:
+      - ./userService:/service
     environment:
       REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_URL: redis://redis:6379
       PORT: 3001
+      MONGO_URL: mongodb://rootuser:rootpassword@mongodb:27017/sekharapp?authSource=admin
+      SECRET: superpassword
+  packetriot:
+    image: packetriot/pktriot:latest
+    depends_on:
+      - user 
+    volumes:
+      - pktriot-data:/data
+volumes:
+  mongo-data:
+  pktriot-data:

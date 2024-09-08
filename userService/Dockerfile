@@ -1,6 +1,6 @@
-FROM node:14
+FROM node:18
 WORKDIR /service
 COPY . .
 RUN npm i
 EXPOSE 3001
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]

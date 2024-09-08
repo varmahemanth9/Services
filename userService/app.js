@@ -2,11 +2,11 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import { client } from "./commonFunctions/redis.js";
-import testController from "./controllers/testController.js";
+import userController from "./controllers/userController.js";
 
 const app = express();
 client.connect();
-// import("./db.js");
+import("./db.js");
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +22,7 @@ app.use(
 );
 // app.use(helmet());
 
-app.use("/", testController);
+app.use("/auth", userController);
 
 app.use((error, req, res, next) => {
     if (error) {

@@ -16,6 +16,10 @@ export const setKey = (key, data) => {
     return client.set(key, data);
 };
 
+export const setKeyWithExpiry = (key, data, expiry=300) => {
+    return client.setEx(key, expiry, data);
+}
+
 export const getKey = (key) => {
     return client.get(key);
 };
